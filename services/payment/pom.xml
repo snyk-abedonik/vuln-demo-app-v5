@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>demo</groupId>
+  <artifactId>payment-service</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+
+    <!--
+      CVE-2021-44228 (Log4Shell) — CRITICAL, CVSS 10.0
+      Reachability: FUNCTION — the vulnerable lookup() path is called directly
+      from PaymentService.processPayment() via logger.info(userInput).
+      Fix: 2.17.1
+    -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.14.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.14.1</version>
+    </dependency>
+
+    <!--
+      CVE-2022-42889 (Text4Shell) — CRITICAL, CVSS 9.8
+      Reachability: FUNCTION — StringSubstitutor.replace() is called directly
+      from OrderService.formatConfirmation().
+      Fix: 1.10.0
+    -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.9</version>
+    </dependency>
+
+    <!--
+      CVE-2015-6420 (Java deserialization via Commons Collections)
+      Reachability: PACKAGE — InvokerTransformer is imported and instantiated.
+      Fix: 3.2.2
+    -->
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+
+  </dependencies>
+</project>
